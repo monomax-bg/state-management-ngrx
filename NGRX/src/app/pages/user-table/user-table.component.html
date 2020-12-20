@@ -1,0 +1,35 @@
+<ng-container *ngIf="users$">
+  <div *ngIf="loading$ | async">...loading</div>
+  <div *ngIf="(errorResponse$| async) !== null && (errorResponse$| async) !== undefined">{{(errorResponse$ | async).message}}</div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>Website</th>
+      <th>Company</th>
+      <th>Number of albums</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users$ | async" (click)="userClick(user.id)" [class.selected]="(selectedUserId$ | async) === user.id">
+      <td>{{user.name}}</td>
+      <td>{{user.username}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.address.city }}/{{user.address.street}}/{{user.address.suite}}</td>
+      <td>{{ user.phone }}</td>
+      <td>
+        <a href="http://{{ user.website }}" target="_blank">
+          {{user.website}}
+        </a>
+      </td>
+      <td>{{user.company.name}}</td>
+      <td>{{user.id}}</td>
+    </tr>
+    </tbody>
+  </table>
+</ng-container>
+

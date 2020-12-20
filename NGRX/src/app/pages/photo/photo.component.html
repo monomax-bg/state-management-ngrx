@@ -1,0 +1,9 @@
+<ng-container *ngIf="photo$ | async as photo">
+  <div *ngIf="loading$ | async">...loading</div>
+  <div *ngIf="errorResponse$ | async">{{(errorResponse$ | async).message}}</div>
+  <ng-container *ngIf="photo$ | async as photo">
+    <h2 class="photo-title">{{photo.title}}</h2>
+    <img [src]="photo.thumbnailUrl" alt="">
+  </ng-container>
+</ng-container>
+
